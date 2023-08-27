@@ -240,7 +240,7 @@ console.log("value1App:",value1);
 
     return (
         <div>
-          <h1>TO DO List</h1>
+          <h1>TO DO List App</h1>
             <div>
             <div>
             { todoList.length!==0 && <button onClick={clearall}>Clear All</button>}
@@ -313,7 +313,9 @@ console.log("value1App:",value1);
            value1={value1} setValue1={setValue1}
            category={category} setCategory={setCategory} 
            categoryOption={categoryOption} setCategoryOption={setCategoryOption}
-           addCategory={addCategory}/>
+           addCategory={addCategory}
+           />
+
          
    
         </div>
