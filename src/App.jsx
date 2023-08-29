@@ -178,12 +178,27 @@ console.log("todosApp:",todos);
       const sf=dispatch(todoAction.filterSearch({category:categoryOption}));
       console.log("sf:",sf);
     }
-
+  //  let catfind;
     const isUniqCategory=() => {
-      if (category.filter(c=> value1.trim === c.value)) {
+      console.log("value1.trim():",value1.trim());
+      console.log("category.lenght",category.length);
+      if (category.length> 0){
+      var catfind=category.filter(ct =>  value1.trim() === ct.value );
+      console.log("catfind:",catfind)
+      // console.log("catfind.value:",catfind.value);
+      console.log("catfind.lenght",catfind.length);
+     
+    }
+      // console.log("catfind2.length:",catfind.length);
+       if (category.length >0 &&  catfind.length >0 ) {
+        console.log("catfind3.length:",catfind.length);
+       
         return false;
       }
+      else {
       return true;
+      }
+    
     }
 
     const addCategory=(e)=> {
@@ -202,9 +217,11 @@ console.log("todosApp:",todos);
       console.log("category3:",category);
       const x=category.find(c=> value1.trim !== c.value);
       console.log("x:",x);
-      console.log("isUniqcategory:",isUniqCategory);
+      console.log("isUniqcategory:",isUniqCategory());
 
-      if( value1.trim() !=='' || isUniqCategory){
+      if(value1.trim() !=='') 
+      {
+        if( isUniqCategory()){
         console.log("value1:",value1);
         console.log("categoryoption:",categoryOption);
         console.log("aaaaaaaaaaaaaaaaaaa");
@@ -214,9 +231,14 @@ console.log("todosApp:",todos);
       setValue1('');
       }
       else {
-          alert(" یک کتگوری جدید وارد کنید");
+          alert(" کتگوری تکراری است . لطفا یک کتگوری جدید وارد کنید");
   
       }
+    }
+    else
+    {
+      alert(" کتگوری  وارد کنید");
+    }
   }
 console.log("value1App:",value1);
 
@@ -243,7 +265,12 @@ console.log("value1App:",value1);
           <h1>TO DO List App</h1>
             <div>
             <div>
-            { todoList.length!==0 && <button onClick={clearall}>Clear All</button>}
+        { todoList.length!==0 && <button style={{backgroundColor:"green"}} onClick={ searchTodoList}>searchtodo</button>}
+        </div>
+       
+        <button style={{backgroundColor:"green"}} onClick={searchFilter}>searchFilter</button>
+            <div style={{backgroundColor:"green"}}>
+            
             { todoList.length!==0 && <div>
           <span >Sort Type:</span>
         <select defaultValue={'DEFAULT'} onChange={ sortTodoList}>
@@ -252,13 +279,20 @@ console.log("value1App:",value1);
           <option value="descending">Descending</option>
         </select>
           </div>}
-          
-              <div><button onClick={sortSearch}>Search and Sort</button></div>
+          </div>
+          <div>
+          { todoList.length!==0 && <button onClick={clearall}>Clear All</button>}
+             
               
                 <div>
+                  <div>
                 <span>Enter Todo:</span>
              <input type='serach'  placeholder='enter todo title' onChange={(e) => setInputSearch(e.target.value)} value={inputSearch}   />
-             <span >Filter By Category:</span>
+             <div><button onClick={sortSearch}>Search and Sort</button></div>
+              { todoList.length!==0 && isFilterd && <button  onClick={deleteFilter}>Delete  Filter</button>}
+              </div>
+            <div style={{backgroundColor:"green"}}>
+            <span >Filter By Category:</span>
             <select  name='categoreis2' id='categoreis2'  value={categoryOption}    onChange={e =>setCategoryOption(e.target.value) }   >
               <option value={""}   selected>All</option>
                 {category.map(op =>(
@@ -268,12 +302,13 @@ console.log("value1App:",value1);
                    
                 ))}
               </select>
+              </div> 
             </div>
             
         
             
              </div>
-              <div>
+              <div style={{backgroundColor:"green"}}>
             <span >Sort By Field</span>
         <select defaultValue={'title'} onChange={(e) => setSortByField(e.target.value)}>
           <option value="title" disabled>None</option>
@@ -296,13 +331,8 @@ console.log("value1App:",value1);
 
           <div>
        
-        { todoList.length!==0 && <button onClick={ searchTodoList}>searchtodo</button>}
-        </div>
-        { todoList.length!==0 && isFilterd && <button onClick={deleteFilter}>Delete  Filter</button>}
-        <button onClick={searchFilter}>searchFilter</button>
-        <div >
-          
-        </div>
+       
+      
           <AddTodo
           value={inputValue} setValue={setInputValue}
            value1={value1} setValue1={setValue1}
@@ -318,6 +348,8 @@ console.log("value1App:",value1);
 
          
    
+        </div>
+       
         </div>
     );
 }

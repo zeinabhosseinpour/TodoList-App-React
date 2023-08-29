@@ -81,7 +81,8 @@ const AddTodo = (props) => {
     
         // dispatch(addTodo(inputValue));
         // if (props.value.trim() && categoryOption.trim() !=='' && categoryOption.trim() !=='placeholder'  )
-        if (props.value.trim() && props.categoryOption.trim() !=='' )
+        if (props.value.trim() !=='')
+        if ( props.categoryOption.trim() !=='' )
         {
             console.log("props.value:",props.value);
             // console.log("categoryOption:",pcategoryOption);
@@ -94,9 +95,12 @@ const AddTodo = (props) => {
         }
         else
         {
-         alert("یک تودو جدید وارد کنید");
+         alert("یک کتگوری انتخاب کنید");
 
        
+    }
+    else {
+        alert("یک تودو جدید وارد کنید");
     }
     // setInputValue("");
 }

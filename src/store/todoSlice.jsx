@@ -147,6 +147,10 @@ const todoSlice=createSlice({
             state.todos[index].done =! action.payload.done;
 
 
+            const index2 = state.todoList.findIndex((todo) => todo.id === action.payload.id);
+            state.todoList[index2].done =! action.payload.done;
+
+
             console.log("done:",action.payload.done);
 
             // state.todoList.map(t => {
@@ -165,6 +169,7 @@ const todoSlice=createSlice({
 
         clearAll:() => initialState  ,
 
+        
         deleteFilter:(state,acttion) => {
 
           state.todos=[...state.todoList];
